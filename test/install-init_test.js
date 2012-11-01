@@ -33,9 +33,9 @@ exports['install-init'] = {
     // Collect the files to assert existence of
     var srcFiles = grunt.file.expandFiles({'dot': true}, 'test_files/**');
 
-    // There will be one assertion per file and one in the end for any errors
-    test.expect(srcFiles.length);
-console.log(srcFiles);
+    // There will be one assertion per file and 3 manual tests
+    test.expect(srcFiles.length + 3);
+
     // Iterate over each file
     srcFiles.forEach(function (srcFile) {
       // Remove test_files from srcFile
@@ -49,6 +49,11 @@ console.log(srcFiles);
       // Assert that they are the same
       test.equal(actualContent, expectedContent, srcFile + ' did not match ' + destFile);
     });
+
+    // Manual tests
+    test.ok(grunt.file.read(initDir + '/installInitTestTemplate.js'), 'installInitTestTemplate.js was not copied successfully');
+    test.ok(grunt.file.read(initDir + '/installInitTestTemplate/root/.gitignore'), '.gitignore was not copied successfully');
+    test.ok(grunt.file.read(initDir + '/installInitTestTemplate/root/grunt.js'), '.gitignore was not copied successfully');
 
     // Callback now that the test is done
     test.done();

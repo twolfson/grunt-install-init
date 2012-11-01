@@ -53,7 +53,7 @@ exports['install-init'] = {
     // Manual tests
     test.ok(grunt.file.read(initDir + '/installInitTestTemplate.js'), 'installInitTestTemplate.js was not copied successfully');
     test.ok(grunt.file.read(initDir + '/installInitTestTemplate/root/.gitignore'), '.gitignore was not copied successfully');
-    test.ok(grunt.file.read(initDir + '/installInitTestTemplate/root/grunt.js'), '.gitignore was not copied successfully');
+    test.ok(grunt.file.read(initDir + '/installInitTestTemplate/root/grunt.js'), 'grunt.js was not copied successfully');
 
     // Callback now that the test is done
     test.done();

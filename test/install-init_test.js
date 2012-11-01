@@ -26,11 +26,31 @@ exports['install-init'] = {
     done();
   },
   'multiTask': function(test) {
-    test.expect(0);
-
     // Locate {{user directory}}/tasks/init
-    var initDir = grunt.file.userDir('tasks/init');
+    var path = require('path'),
+        initDir = grunt.file.userDir('tasks/init');
 
+    // Collect the files to assert existence of
+    var srcFiles = grunt.file.expandFiles({'dot': true}, 'test_files/**');
+
+    // There will be one assertion per file and one in the end for any errors
+    test.expect(srcFiles.length);
+
+    // Iterate over each file
+    srcFiles.forEach(function (srcFile) {
+      // Remove test_files from srcFile
+      var _srcFile = srcFile.replace('test_files', ''),
+          destFile = path.join(initDir, _srcFile);
+
+      // Read in ours and their file
+      var expectedContent = grunt.file.read(srcFile),
+          actualContent = grunt.file.read(destFile);
+
+      // Assert that they are the same
+      test.equal(actualContent, expectedContent, srcFile + ' did not match ' + destFile);
+    });
+
+    // Callback now that the test is done
     test.done();
   }
 };

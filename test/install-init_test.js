@@ -35,7 +35,7 @@ exports['install-init'] = {
 
     // There will be one assertion per file and one in the end for any errors
     test.expect(srcFiles.length);
-
+console.log(srcFiles);
     // Iterate over each file
     srcFiles.forEach(function (srcFile) {
       // Remove test_files from srcFile

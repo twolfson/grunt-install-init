@@ -26,8 +26,8 @@ module.exports = function(grunt) {
         dest = grunt.file.userDir('tasks/init');
 
     // Grab the srcDirs and srcFiles
-    var srcDirs = grunt.file.expandDirs(src),
-        srcFiles = grunt.file.expandFiles(src);
+    var srcDirs = grunt.file.expandDirs({'dot': true}, src),
+        srcFiles = grunt.file.expandFiles({'dot': true}, src);
 
     // Add srcJS to the head of the srcFiles
     srcFiles.unshift(srcJS);

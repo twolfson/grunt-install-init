@@ -30,7 +30,8 @@
     "test": "grunt --base ./test/ --config ./test/grunt.js"
   },
   "devDependencies": {
-    "grunt": "~0.3.12"
+    "grunt": "~0.3.12",
+    "grunt-contrib": "~0.3.0"
   },
   "keywords": [
     "gruntplugin"

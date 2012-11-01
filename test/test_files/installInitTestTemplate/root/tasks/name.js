@@ -25,7 +25,7 @@ module.exports = function(grunt) {
 
     // Concatenate the srcFiles, process the blob through our helper,
     var separator = data.separator || '\n',
-        srcBlob = grunt.helper('concat', srcFiles, {separator: separator});
+        srcBlob = grunt.helper('concat', srcFiles, {separator: separator}),
         content = grunt.helper('{%= short_name %}', srcBlob);
 
     // Write out the content

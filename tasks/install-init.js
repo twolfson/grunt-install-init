@@ -15,27 +15,58 @@ module.exports = function(grunt) {
   // TASKS
   // ==========================================================================
 
+  var path = require('path'),
+      rimraf = require('rimraf');
   grunt.registerMultiTask('install-init', 'Installs a grunt init template to the grunt user directory', function() {
-    // Collect the filepaths we need
     var file = this.file,
-        data = this.data,
-        src = file.src,
-        srcFiles = grunt.file.expand(src),
-        dest = file.dest;
+        baseDir = file.src,
+        pluginName = file.dest,
+        srcJS = baseDir + '/' + pluginName + '.js',
+        src = baseDir + '/' + pluginName + '/**',
+        dest = grunt.file.userDir('tasks/init');
 
-    // Concatenate the srcFiles, process the blob through our helper,
-    var separator = data.separator || '\n',
-        srcBlob = grunt.helper('concat', srcFiles, {separator: separator});
-        content = grunt.helper('install-init', srcBlob);
+    // Grab the srcDirs and srcFiles
+    var srcDirs = grunt.file.expandDirs(src),
+        srcFiles = grunt.file.expandFiles(src);
 
-    // Write out the content
-    grunt.file.write(dest, content);
+    // Add srcJS to the head of the srcFiles
+    srcFiles.unshift(srcJS);
+
+    // Empty each of the srcDirs
+    srcDirs.forEach(function (srcDir) {
+      // Remove baseDir from srcDir
+      srcDir = srcDir.replace(baseDir, '');
+
+      // Empty the directory
+      var destDir = path.join(dest, srcDir);
+      rimraf.sync(destDir);
+    });
+
+    // Re-create each of the srcDirs
+    srcDirs.forEach(function (srcDir) {
+      // Remove baseDir from srcDir
+      srcDir = srcDir.replace(baseDir, '');
+
+      // Re-creaate the directory
+      var destDir = path.join(dest, srcDir);
+      grunt.file.mkdir(destDir);
+    });
+
+    // Copy over each of the srcFiles
+    srcFiles.forEach(function (srcFile) {
+      // Remove baseDir from srcFile
+      var _srcFile = srcFile.replace(baseDir, '');
+
+      // Copy over the file
+      var destFile = path.join(dest, _srcFile);
+      grunt.file.copy(srcFile, destFile);
+    });
 
     // Fail task if errors were logged.
     if (this.errorCount) { return false; }
 
     // Otherwise, print a success message.
-    grunt.log.writeln('File "' + this.file.dest + '" created.');
+    grunt.log.writeln('Grunt init template "' + pluginName + '" installed.');
   });
 
   // ==========================================================================

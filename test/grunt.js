@@ -3,10 +3,7 @@ module.exports = function (grunt) {
   // Project configuration.
   grunt.initConfig({
     'install-init': {
-      all: {
-        src: ['expected/file.js'],
-        dest: 'actual/file.js'
-      }
+      'install-init-test': 'test/test_file'
     },
     test: {
       all: '*_test.js'

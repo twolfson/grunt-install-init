@@ -7,7 +7,7 @@ module.exports = function (grunt) {
       'installInitTestTemplate': 'test_files'
     },
     clean: {
-      'install-init': [initDir + 'installInitTestTemplate.js', initDir + 'installInitTestTemplate']
+      'install-init': [initDir + '/installInitTestTemplate.js', initDir + '/installInitTestTemplate']
     },
     test: {
       all: '*_test.js'

@@ -2,8 +2,11 @@ module.exports = function (grunt) {
 
   // Project configuration.
   grunt.initConfig({
-    'install-init': {
-      'installInitTestTemplate': 'test_files'
+    '{%= short_name %}': {
+      all: {
+        src: ['expected/file.js'],
+        dest: 'actual/file.js'
+      }
     },
     test: {
       all: '*_test.js'
@@ -14,5 +17,5 @@ module.exports = function (grunt) {
   grunt.loadTasks('../tasks');
 
   // Run project task then tests.
-  grunt.registerTask('default', 'install-init test');
+  grunt.registerTask('default', '{%= short_name %} test');
 };

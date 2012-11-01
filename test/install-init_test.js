@@ -26,7 +26,7 @@ exports['install-init'] = {
     done();
   },
   'multiTask': function(test) {
-    test.expect(1);
+    test.expect(0);
 
     // Locate {{user directory}}/tasks/init
     var initDir = grunt.file.userDir('tasks/init');

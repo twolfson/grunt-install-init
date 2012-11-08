@@ -23,7 +23,7 @@ module.exports = function(grunt) {
         pluginName = file.dest,
         srcJS = baseDir + '/' + pluginName + '.js',
         src = baseDir + '/' + pluginName + '/**',
-        dest = grunt.file.userDir('tasks/init');
+        dest = grunt.helper('install-init-createUserDir', 'tasks/init');
 
     // Grab the srcDirs and srcFiles
     var srcDirs = grunt.file.expandDirs({'dot': true}, src),
@@ -77,4 +77,16 @@ module.exports = function(grunt) {
     return content;
   });
 
+  // Same as grunt.file.userDir except instead of returning null, it creates the requested directory
+  // https://github.com/gruntjs/grunt/blob/fc877031422ef1473f86a822c967f72c0dbc5c50/lib/grunt/file.js#L235-242
+  // This is being submitted as a pull request
+  var path = require('path');
+  grunt.registerHelper('install-init-createUserDir', function () {
+    var dirpath = path.join.apply(path, arguments);
+    var win32 = process.platform === 'win32';
+    var homepath = process.env[win32 ? 'USERPROFILE' : 'HOME'];
+    dirpath = path.resolve(homepath, '.grunt', dirpath);
+    grunt.file.mkdir(dirpath);
+    return dirpath;
+  });
 };

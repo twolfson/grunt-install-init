@@ -15,7 +15,6 @@ module.exports = function (grunt) {
     // Load in helpers and save userDir
     var initHelpers = require(initHelpersPath).init(grunt);
     userDir = initHelpers.userDir;
-    console.log(userDir);
   }
 
   // Return userDir

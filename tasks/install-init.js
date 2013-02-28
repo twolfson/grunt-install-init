@@ -6,7 +6,18 @@
  * Licensed under the MIT license.
  */
 
+var gruntRetro = require('grunt-retro');
 module.exports = function(grunt) {
+  // Load and bind grunt-retro
+  grunt = gruntRetro(grunt);
+
+  // TODO: Should this be included in grunt-retro?
+  // Fallback userDir manually
+  grunt.file.userDir = grunt.file.userDir || function () {
+    var dirpath = path.join.apply(path, arguments);
+    var homepath = process.env[win32 ? 'USERPROFILE' : 'HOME'];
+    return path.resolve(homepath, '.grunt-init', dirpath);
+  };
 
   // Please see the grunt documentation for more information regarding task and
   // helper creation: https://github.com/gruntjs/grunt/blob/master/docs/toc.md

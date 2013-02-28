@@ -12,5 +12,5 @@ module.exports = function (grunt) {
   process.chdir(__dirname);
 
   // Override default task
-  grunt.registerTask('default', ['install-init', 'test', 'clean']);
+  grunt.registerTask('default', ['install-init', 'nodeunit', 'clean']);
 };

@@ -39,11 +39,14 @@ module.exports = function(grunt) {
         dest = grunt.file.userDir('tasks/init');
 
     // Grab the srcDirs and srcFiles
+    // TODO: Issue is expandDirs is taking single param and not double -- need to use object.exted
     var srcDirs = grunt.file.expandDirs({'dot': true}, src),
         srcFiles = grunt.file.expandFiles({'dot': true}, src);
+    console.log('0');
 
     // Add srcJS to the head of the srcFiles
     srcFiles.unshift(srcJS);
+    console.log('1');
 
     // Empty each of the srcDirs
     srcDirs.forEach(function (srcDir) {
@@ -55,6 +58,8 @@ module.exports = function(grunt) {
       rimraf.sync(destDir);
     });
 
+    console.log('2');
+
     // Re-create each of the srcDirs
     srcDirs.forEach(function (srcDir) {
       // Remove baseDir from srcDir
@@ -64,6 +69,7 @@ module.exports = function(grunt) {
       var destDir = path.join(dest, srcDir);
       grunt.file.mkdir(destDir);
     });
+    console.log('3');
 
     // Copy over each of the srcFiles
     srcFiles.forEach(function (srcFile) {
@@ -74,9 +80,11 @@ module.exports = function(grunt) {
       var destFile = path.join(dest, _srcFile);
       grunt.file.copy(srcFile, destFile);
     });
+    console.log('4');
 
     // Fail task if errors were logged.
     if (this.errorCount) { return false; }
+    console.log('5');
 
     // Otherwise, print a success message.
     grunt.log.writeln('Grunt init template "' + pluginName + '" installed.');

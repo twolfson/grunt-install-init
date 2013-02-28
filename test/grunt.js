@@ -1,7 +1,8 @@
 module.exports = function (grunt) {
 
   // Project configuration.
-  var initDir = grunt.file.userDir('tasks/init');
+  var userDir = require('./userDir')(grunt),
+      initDir = userDir('tasks/init');
   grunt.initConfig({
     'install-init': {
       'installInitTestTemplate': 'test_files'

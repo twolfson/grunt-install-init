@@ -6,7 +6,9 @@
  * Licensed under the MIT license.
  */
 
-var gruntRetro = require('grunt-retro');
+var win32 = process.platform === 'win32',
+    path = require('path'),
+    gruntRetro = require('grunt-retro');
 module.exports = function(grunt) {
   // Load and bind grunt-retro
   grunt = gruntRetro(grunt);

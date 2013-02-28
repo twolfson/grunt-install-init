@@ -1,4 +1,5 @@
-var grunt = require('grunt');
+var grunt = require('grunt'),
+    userDir = require('./userDir')(grunt);
 
 /*
   ======== A Handy Little Nodeunit Reference ========
@@ -29,7 +30,7 @@ exports['install-init'] = {
   'multiTask': function(test) {
     // Locate {{user directory}}/tasks/init
     var path = require('path'),
-        initDir = grunt.file.userDir('tasks/init');
+        initDir = userDir('tasks/init');
 
     // Collect the files to assert existence of
     var srcFiles = grunt.file.expandFiles({'dot': true}, 'test_files/**');

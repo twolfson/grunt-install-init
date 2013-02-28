@@ -20,6 +20,11 @@ var grunt = require('grunt');
     test.ifError(value)
 */
 
+// If there is no grunt.file.userDir, hackishly grab it from grunt-init
+if (!grunt.file.userDir) {
+
+}
+
 exports['install-init'] = {
   setUp: function(done) {
     // setup here

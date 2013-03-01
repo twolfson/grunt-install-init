@@ -13,13 +13,6 @@ module.exports = function(grunt) {
   // Load and bind grunt-retro
   grunt = gruntRetro(grunt);
 
-  // TODO: Should this be included in grunt-retro?
-  // Fallback userDir manually
-  grunt.file.userDir = grunt.file.userDir || function () {
-    var dirpath = path.join.apply(path, arguments);
-    var homepath = process.env[win32 ? 'USERPROFILE' : 'HOME'];
-    return path.resolve(homepath, '.grunt-init', dirpath);
-  };
 
   // Please see the grunt documentation for more information regarding task and
   // helper creation: https://github.com/gruntjs/grunt/blob/master/docs/toc.md
@@ -39,7 +32,6 @@ module.exports = function(grunt) {
         dest = grunt.helper('install-init-createUserDir', 'tasks/init');
 
     // Grab the srcDirs and srcFiles
-    // TODO: Issue is expandDirs is taking single param and not double -- need to use object.exted
     var srcDirs = grunt.file.expandDirs({'dot': true}, src),
         srcFiles = grunt.file.expandFiles({'dot': true}, src);
 
@@ -93,8 +85,8 @@ module.exports = function(grunt) {
 
   // Same as grunt.file.userDir except instead of returning null, it creates the requested directory
   // https://github.com/gruntjs/grunt/blob/fc877031422ef1473f86a822c967f72c0dbc5c50/lib/grunt/file.js#L235-242
-  // This is being submitted as a pull request
-  var path = require('path');
+  var gruntVersion = grunt.version;
+  console.log(gruntVersion);
   grunt.registerHelper('install-init-createUserDir', function () {
     var dirpath = path.join.apply(path, arguments);
     var win32 = process.platform === 'win32';

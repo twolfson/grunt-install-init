@@ -1,7 +1,7 @@
 {
   "name": "grunt-install-init",
   "description": "Install a grunt init template",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "homepage": "https://github.com/twolfson/grunt-install-init",
   "author": {
     "name": "Todd Wolfson",

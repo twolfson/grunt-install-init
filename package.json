@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "rimraf": "~2.0.2",
-    "grunt-retro": "~0.3.1"
+    "grunt-retro": "~0.4.0"
   },
   "_devDependencies": {
     "grunt": "~0.3.12"

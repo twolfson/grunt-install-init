@@ -85,13 +85,13 @@ module.exports = function(grunt) {
 
   // Same as grunt.file.userDir except instead of returning null, it creates the requested directory
   // https://github.com/gruntjs/grunt/blob/fc877031422ef1473f86a822c967f72c0dbc5c50/lib/grunt/file.js#L235-242
-  var gruntVersion = grunt.version;
-  console.log(gruntVersion);
+  var isGrunt0_4 = !grunt.file.userDir,
+      initFolder = isGrunt0_4 ? '.grunt-init' : '.grunt';
   grunt.registerHelper('install-init-createUserDir', function () {
     var dirpath = path.join.apply(path, arguments);
     var win32 = process.platform === 'win32';
     var homepath = process.env[win32 ? 'USERPROFILE' : 'HOME'];
-    dirpath = path.resolve(homepath, '.grunt', dirpath);
+    dirpath = path.resolve(homepath, initFolder, dirpath);
     grunt.file.mkdir(dirpath);
     return dirpath;
   });

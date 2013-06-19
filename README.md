@@ -1,4 +1,4 @@
-# grunt-install-init
+# grunt-install-init [![Donate on Gittip](http://badgr.co/gittip/twolfson.png)](https://www.gittip.com/twolfson/)
 
 Install a grunt init template
 
